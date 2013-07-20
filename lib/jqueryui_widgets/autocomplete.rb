@@ -9,6 +9,19 @@
 #
 class JQueryUIWidgets::AutoComplete < PageObject::Elements::TextField
   def suggestions
-    self.parent.unordered_list_element(:xpath => 'following-sibling::*').list_item_elements.collect { |li| li.text }
+    wait_for_suggestions
+    suggestions_container.list_item_elements.collect { |li| li.text }
+  end
+
+  def suggestions_container
+    self.parent.unordered_list_element(:xpath => 'following-sibling::*')
+  end
+
+  private
+
+  def wait_for_suggestions
+    wait_until(1, "Suggestions not visible within one second") do
+      suggestions_container.list_item_elements.length > 0
+    end
   end
 end
