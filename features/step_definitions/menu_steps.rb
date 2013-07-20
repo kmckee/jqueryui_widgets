@@ -11,7 +11,7 @@ Then /^I should see the inactive option "(.+)", "(.+)"$/ do |item1, item2|
   item.attribute('class').should include 'ui-state-disabled'
 end
 
-When /^I should see the "(.+)", "(.+)", "(.+)" option$/ do |item1, item2, item3|
+Then /^I should see the "(.+)", "(.+)", "(.+)" option$/ do |item1, item2, item3|
   item = on(MenuPage).menus.search_for(item1, item2, item3)
   item.should_not be_nil
 end
