@@ -8,11 +8,18 @@
 # suit their own needs.
 #
 class JQueryUIWidgets::AutoComplete < PageObject::Elements::TextField
+  #
+  # Suggestions method returns a set of the currently displayed autocomplete
+  # suggestions.
+  #
   def suggestions
     wait_for_suggestions
     suggestions_container.list_item_elements.collect { |li| li.text }
   end
 
+  #
+  # Returns an unordered list that contains all suggestions.
+  #
   def suggestions_container
     self.parent.unordered_list_element(:xpath => 'following-sibling::*')
   end
